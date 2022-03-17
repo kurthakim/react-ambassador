@@ -1,6 +1,9 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import React, { Dispatch, useEffect, useState } from 'react';
+import { connect } from 'react-redux';
 import { Navigate } from 'react-router-dom';
+import { User } from '../models/user';
+import { setUser } from '../redux/actions/setUserAction';
 import Header from './Header';
 import Nav from './Nav';
 
@@ -37,4 +40,12 @@ const Layout = (props: any) => {
   );
 };
 
-export default Layout;
+const mapStateToProps = (state: { user: User }) => ({
+  user: state.user,
+});
+
+const mapDispatchToProps = (dispatch: Dispatch<any>) => ({
+  setUser: (user: User) => dispatch(setUser(user)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Layout);
