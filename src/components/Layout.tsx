@@ -1,14 +1,14 @@
 import axios from 'axios';
 import React, { Dispatch, useEffect, useState } from 'react';
 import { connect } from 'react-redux';
-import { Navigate } from 'react-router-dom';
+import { Navigate, useLocation } from 'react-router-dom';
 import { User } from '../models/user';
 import { setUser } from '../redux/actions/setUserAction';
 import Header from './Header';
 import Nav from './Nav';
 
 const Layout = (props: any) => {
-  const [redirect, setRedirect] = useState(false);
+  const location = useLocation();
 
   useEffect(() => {
     (async () => {
@@ -16,13 +16,15 @@ const Layout = (props: any) => {
         const { data } = await axios.get('user');
         props.setUser(data);
       } catch (e) {
-        setRedirect(true);
+        console.log(e);
       }
     })();
   }, []);
 
-  if (redirect) {
-    return <Navigate to="/login" />;
+  let header;
+
+  if (location.pathname === '/' || location.pathname === '/backend') {
+    header = <Header />;
   }
 
   return (
@@ -30,7 +32,7 @@ const Layout = (props: any) => {
       <Nav />
 
       <main>
-        <Header />
+        {header}
 
         <div className="album py-5 bg-light">
           <div className="container">{props.children}</div>

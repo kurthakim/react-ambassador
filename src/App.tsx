@@ -3,6 +3,9 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import ProductsFrontend from './pages/ProductsFrontend';
 import Login from './pages/Login';
 import Register from './pages/Register';
+import Profile from './pages/Profile';
+import Stats from './pages/Stats';
+import Rankings from './pages/Rankings';
 
 function App() {
   return (
@@ -11,6 +14,9 @@ function App() {
         <Route path="/" element={<ProductsFrontend />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/profile" element={<Profile />} />
+        <Route path="/stats" element={<Stats />} />
+        <Route path="/rankings" element={<Rankings />} />
       </Routes>
     </BrowserRouter>
   );
