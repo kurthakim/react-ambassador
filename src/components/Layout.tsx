@@ -1,7 +1,7 @@
 import axios from 'axios';
-import React, { Dispatch, useEffect, useState } from 'react';
+import { Dispatch, useEffect } from 'react';
 import { connect } from 'react-redux';
-import { Navigate, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { User } from '../models/user';
 import { setUser } from '../redux/actions/setUserAction';
 import Header from './Header';

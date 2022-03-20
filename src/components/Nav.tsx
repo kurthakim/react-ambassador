@@ -1,23 +1,20 @@
 import axios from 'axios';
-import React, { Dispatch, useState } from 'react';
+import { Dispatch } from 'react';
 import { connect } from 'react-redux';
-import { Link, Navigate } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { User } from '../models/user';
 import { setUser } from '../redux/actions/setUserAction';
 
 const Nav = (props: any) => {
   let menu;
-  const [redirect, setRedirect] = useState(false);
+  const navLinkStyle = 'nav-link px-2 link-secondary';
+  const activeStyle = 'header';
 
   const logout = async () => {
     await axios.post('logout');
     props.setUser(null);
-    // setRedirect(true);
   };
-
-  // if (redirect) {
-  //   return <Navigate to="/login" />;
-  // }
 
   if (props.user?.id) {
     menu = (
@@ -54,14 +51,24 @@ const Nav = (props: any) => {
       <header className="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
         <ul className="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
           <li>
-            <a href="#" className="nav-link px-2 link-secondary">
+            <NavLink
+              to="/"
+              className={(navData) =>
+                navData.isActive ? activeStyle + navLinkStyle : navLinkStyle
+              }
+            >
               Frontend
-            </a>
+            </NavLink>
           </li>
           <li>
-            <a href="#" className="nav-link px-2 link-dark">
+            <NavLink
+              to={'/backend'}
+              className={(navData) =>
+                navData.isActive ? activeStyle + navLinkStyle : navLinkStyle
+              }
+            >
               Backend
-            </a>
+            </NavLink>
           </li>
         </ul>
         {menu}
